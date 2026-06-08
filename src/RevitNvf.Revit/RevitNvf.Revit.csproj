@@ -9,6 +9,8 @@
     <AssemblyName>RevitNvf.Revit</AssemblyName>
     <!-- Revit грузит сборку из своего домена; PDB-портативность не нужна. -->
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <!-- Хостинг WPF dockable-панели из RevitNvf.UI (FrameworkElement). -->
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <!-- Локальные ссылки на Revit API (Copy Local = False). -->
@@ -25,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RevitNvf.Core\RevitNvf.Core.csproj" />
+    <ProjectReference Include="..\RevitNvf.UI\RevitNvf.UI.csproj" />
   </ItemGroup>
 
   <!-- Post-build: копирование сборки и манифеста в папку Addins Revit (только Windows). -->

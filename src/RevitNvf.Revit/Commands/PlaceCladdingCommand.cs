@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
@@ -12,13 +13,12 @@ using RevitNvf.UI;
 namespace RevitNvf.Revit.Commands
 {
     /// <summary>
-    /// Шаг 5: вертикальные направляющие по линиям кронштейнов. Домен строит отрезки,
-    /// адаптер материализует их линиями модели на плоскости выбранной грани.
-    /// Линии модели — временная визуализация; реальные профили (sweep по семейству)
-    /// появятся на следующих шагах.
+    /// Шаг 6/7: раскладка облицовки на выбранной грани с учётом шва, режима привязки
+    /// и доборных элементов (параметры — из панели). Элементы визуализируются
+    /// прямоугольными контурами (линии модели) до появления семейств панелей.
     /// </summary>
     [Transaction(TransactionMode.Manual)]
-    public class PlaceGuidesCommand : IExternalCommand
+    public class PlaceCladdingCommand : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -28,7 +28,7 @@ namespace RevitNvf.Revit.Commands
             try
             {
                 Reference faceRef = uidoc.Selection.PickObject(
-                    ObjectType.Face, "Выберите плоскую грань стены для раскладки направляющих");
+                    ObjectType.Face, "Выберите плоскую грань стены для раскладки облицовки");
                 Element host = doc.GetElement(faceRef);
                 if (!(host.GetGeometryObjectFromReference(faceRef) is PlanarFace planarFace))
                 {
@@ -39,34 +39,32 @@ namespace RevitNvf.Revit.Commands
                 var faceSubstrate = new PlanarFaceSubstrate(planarFace, faceRef);
                 Substrate substrate = faceSubstrate.ToSubstrate();
 
-                FacadeSystem system = FacadeParametersStore.Current.ToBracketSystem();
-                IReadOnlyList<Guide> guides = GuideLayout.Generate(substrate, system);
-                if (guides.Count == 0)
+                Cladding cladding = FacadeParametersStore.Current.ToCladding();
+                IReadOnlyList<Panel> panels = PanelLayout.Generate(substrate, cladding);
+                if (panels.Count == 0)
                 {
-                    message = "Для выбранной грани и параметров системы направляющие не размещаются " +
-                              "(нужно минимум два ряда кронштейнов по высоте).";
+                    message = "Для выбранной грани и параметров облицовки элементы не размещаются.";
                     return Result.Cancelled;
                 }
 
-                using (var t = new Transaction(doc, "НВФ: направляющие"))
+                using (var t = new Transaction(doc, "НВФ: облицовка"))
                 {
                     t.Start();
 
                     Plane plane = Plane.CreateByNormalAndOrigin(planarFace.FaceNormal, planarFace.Origin);
                     SketchPlane sketchPlane = SketchPlane.Create(doc, plane);
 
-                    foreach (Guide guide in guides)
+                    foreach (Panel panel in panels)
                     {
-                        XYZ start = faceSubstrate.ToWorldPoint(guide.Start);
-                        XYZ end = faceSubstrate.ToWorldPoint(guide.End);
-                        Line line = Line.CreateBound(start, end);
-                        doc.Create.NewModelCurve(line, sketchPlane);
+                        ModelCurveFactory.CreatePanelOutline(doc, sketchPlane, faceSubstrate, panel);
                     }
 
                     t.Commit();
                 }
 
-                TaskDialog.Show("RevitNvf", $"Размещено направляющих: {guides.Count}.");
+                int edge = panels.Count(p => p.IsEdge);
+                TaskDialog.Show("RevitNvf",
+                    $"Размещено элементов облицовки: {panels.Count} (доборных: {edge}).");
                 return Result.Succeeded;
             }
             catch (Autodesk.Revit.Exceptions.OperationCanceledException)

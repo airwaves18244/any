@@ -57,18 +57,37 @@
   визуализация; реальные профили — далее). Кнопка «Направляющие».
 - Проверка: `dotnet test` (Core) локально/в CI; команда — локально в Revit.
 
-## Шаг 6 — Слои пирога и облицовка
-- Слои (утеплитель/ветрозащита/зазор) по толщинам `FacadeSystem`.
-- Раскладка облицовочных панелей от базовой точки с учётом шва и режима старта.
-- Тесты раскладки (швы, центрирование, краевые панели).
+## Шаг 6 — Слои пирога и облицовка ✅ (выполнено)
+- Core: `Model/Cladding` (+ `PanelStartMode`), `Model/Panel`,
+  `Layout/PanelLayout` — сетка панелей с учётом шва, привязки от угла/центрирования.
+- Core: `Model/PieLayers` (+ `Layer`, `LayerType`), `Layout/LayerStackup` — состав
+  пирога от стены наружу с накопленным смещением.
+- Тесты `PanelLayoutTests`, `LayerStackupTests`.
+- Адаптер: `Commands/PlaceCladdingCommand` (контуры панелей линиями модели),
+  `Commands/ShowLayerStackupCommand` (состав пирога диалогом),
+  `Geometry/ModelCurveFactory`.
 
-## Шаг 7 — Спецификации, угловые и доборные элементы
-- Угловые/доборные элементы у углов, проёмов, парапета, цоколя.
-- Shared parameters и категории семейств; ведомости материалов.
+## Шаг 7 — Спецификации и доборные элементы ✅ (выполнено)
+- Core: доборные (краевые) панели в `PanelLayout` через `Cladding.IncludeEdgePanels`
+  (`Panel.IsEdge`); `Reporting/TakeoffReport` + `Reporting/FacadeTakeoff` —
+  ведомость (кронштейны, направляющие, облицовка полные/доборные + площадь, пирог).
+- Тесты `FacadeTakeoffTests` + краевые сценарии в `PanelLayoutTests`.
+- Адаптер: `Commands/ShowTakeoffCommand` (ведомость диалогом).
+- Полноценные Revit-расписания/угловые элементы у проёмов — задел на будущее.
 
-## Шаг 8 — UI параметров системы
-- WPF dockable-панель ввода `FacadeSystem`; пресеты систем (керамогранит/
-  кассеты/композит); связывание с командами.
+## Шаг 8 — UI параметров системы ✅ (выполнено)
+- `RevitNvf.UI` стал чистым WPF-слоем (зависит только от Core); `RevitNvf.Revit`
+  ссылается на UI и хостит панель (цикла нет).
+- UI: `ViewModels/FacadeParametersViewModel` (+ `ViewModelBase`),
+  `Views/FacadeParametersView` (WPF), `FacadeParametersStore` (общая модель).
+- Core: `Model/FacadePreset` — пресеты (керамогранит/кассеты/композит).
+- Адаптер: `Panels/FacadeParametersPaneProvider` + `PaneIds`,
+  `Commands/ShowParametersPaneCommand`; регистрация панели и кнопки в `RibbonApp`.
+- Команды раскладки читают параметры из `FacadeParametersStore.Current`.
+
+## Готово
+Шаги 1–8 выполнены. Дальнейшее развитие — реальные семейства профилей/панелей,
+Revit-расписания, угловые элементы у проёмов/парапета, теплотехнические проверки.
 
 ## Сквозные практики
 - Каждый шаг: код + тесты (для Core) + обновление docs при изменении модели.

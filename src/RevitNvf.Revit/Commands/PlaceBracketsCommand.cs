@@ -8,6 +8,7 @@ using RevitNvf.Core.Layout;
 using RevitNvf.Core.Model;
 using RevitNvf.Revit.Families;
 using RevitNvf.Revit.Geometry;
+using RevitNvf.UI;
 
 namespace RevitNvf.Revit.Commands
 {
@@ -40,8 +41,8 @@ namespace RevitNvf.Revit.Commands
                 var faceSubstrate = new PlanarFaceSubstrate(planarFace, faceRef);
                 Substrate substrate = faceSubstrate.ToSubstrate();
 
-                // 3. Раскладка в домене.
-                FacadeSystem system = FacadeSystemDefaults.Create();
+                // 3. Раскладка в домене (параметры — из панели).
+                FacadeSystem system = FacadeParametersStore.Current.ToBracketSystem();
                 IReadOnlyList<Bracket> brackets = BracketLayout.Generate(substrate, system);
                 if (brackets.Count == 0)
                 {

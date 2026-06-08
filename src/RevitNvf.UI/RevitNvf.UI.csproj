@@ -10,9 +10,10 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
+  <!-- Чистый WPF-слой (views + viewmodels): зависит только от Core, без Revit API.
+       Это позволяет RevitNvf.Revit ссылаться на UI и хостить панели без цикла. -->
   <ItemGroup>
     <ProjectReference Include="..\RevitNvf.Core\RevitNvf.Core.csproj" />
-    <ProjectReference Include="..\RevitNvf.Revit\RevitNvf.Revit.csproj" />
   </ItemGroup>
 
 </Project>
