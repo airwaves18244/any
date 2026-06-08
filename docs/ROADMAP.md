@@ -19,10 +19,14 @@
 - Реализовано: `Directory.Build.props` (RevitVersion/RevitApiDir), 4 проекта,
   `Point2d` + smoke-тесты, `build/RevitNvf.addin`, post-build деплой (Windows).
 
-## Шаг 2 — Hello-World в Revit
-- `IExternalApplication`: вкладка на ленте + кнопка.
-- `IExternalCommand` с `TaskDialog` («плагин загружен»).
-- Проверка: ручной запуск в Revit 2024 (локально), кнопка появляется и работает.
+## Шаг 2 — Hello-World в Revit ✅ (выполнено)
+- `IExternalApplication` (`RibbonApp`): вкладка «НВФ» → панель «Фасад» → кнопка «О плагине».
+- `IExternalCommand` (`ShowAboutCommand`, `[Transaction(Manual)]`) с `TaskDialog`.
+- Реализовано: `src/RevitNvf.Revit/Application/RibbonApp.cs`,
+  `src/RevitNvf.Revit/Commands/ShowAboutCommand.cs`; удалён placeholder `AssemblyMarker`.
+- Проверка: **локально** в Revit 2024 — собрать `RevitNvf.Revit` (Windows + Revit),
+  запустить Revit, на ленте появляется вкладка «НВФ», кнопка показывает диалог.
+  В облаке не собирается (нет Revit API / SDK).
 
 ## Шаг 3 — Доменная модель и раскладка кронштейнов (TDD)
 - В `Core`: типы `FacadeSystem`, `Substrate`, `Bracket` (+ точки/векторы).
