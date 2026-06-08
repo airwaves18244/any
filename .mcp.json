@@ -1,0 +1,6 @@
+{
+  "//": "Шаблон конфигурации MCP-серверов для ЛОКАЛЬНОГО Claude Code (desktop/CLI).",
+  "//revit-mcp": "Разкомментируйте и настройте под выбранный open-source Revit-MCP. См. docs/REVIT_MCP_SETUP.md. В ОБЛАЧНОМ контейнере не работает (нет запущенного Revit).",
+  "mcpServers": {
+  }
+}

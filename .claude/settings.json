@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(dotnet format:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -d tests/RevitNvf.Core.Tests ]; then echo '[RevitNvf] Running Core tests...'; dotnet test tests/RevitNvf.Core.Tests --nologo -v minimal || echo '[RevitNvf] Core tests reported failures (see above).'; else echo '[RevitNvf] Core test project not scaffolded yet — skipping build/test (see docs/ROADMAP.md step 1).'; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
