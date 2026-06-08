@@ -45,6 +45,24 @@ namespace RevitNvf.Revit
 
             string assemblyPath = Assembly.GetExecutingAssembly().Location;
 
+            var bracketsButton = new PushButtonData(
+                name: "RevitNvf_PlaceBrackets",
+                text: "Кронштейны",
+                assemblyName: assemblyPath,
+                className: typeof(PlaceBracketsCommand).FullName)
+            {
+                ToolTip = "Раскладка кронштейнов сеткой на выбранной плоской грани стены."
+            };
+
+            var guidesButton = new PushButtonData(
+                name: "RevitNvf_PlaceGuides",
+                text: "Направляющие",
+                assemblyName: assemblyPath,
+                className: typeof(PlaceGuidesCommand).FullName)
+            {
+                ToolTip = "Вертикальные направляющие по линиям кронштейнов на выбранной грани."
+            };
+
             var aboutButton = new PushButtonData(
                 name: "RevitNvf_About",
                 text: "О плагине",
@@ -54,6 +72,9 @@ namespace RevitNvf.Revit
                 ToolTip = "Информация о плагине RevitNvf (навесные вентилируемые фасады)."
             };
 
+            panel.AddItem(bracketsButton);
+            panel.AddItem(guidesButton);
+            panel.AddSeparator();
             panel.AddItem(aboutButton);
         }
     }
