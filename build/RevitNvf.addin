@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Манифест add-in для Revit 2024. Кладётся в
+     %AppData%\Autodesk\Revit\Addins\2024 (см. post-build в RevitNvf.Revit.csproj).
+     FullClassName указывает на точку входа IExternalApplication (RibbonApp),
+     которая реализуется на шаге 2 (см. docs/ROADMAP.md). -->
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>RevitNvf</Name>
+    <Assembly>RevitNvf.Revit.dll</Assembly>
+    <FullClassName>RevitNvf.Revit.RibbonApp</FullClassName>
+    <AddInId>55e7e3eb-90fa-493d-b737-d6792b0aeafb</AddInId>
+    <VendorId>NVF</VendorId>
+    <VendorDescription>RevitNvf — навесные вентилируемые фасады</VendorDescription>
+  </AddIn>
+</RevitAddIns>
