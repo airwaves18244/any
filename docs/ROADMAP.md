@@ -4,7 +4,7 @@
 расширения. Доменную логику (Core) ведём через TDD: тесты в
 `RevitNvf.Core.Tests` запускаются кросс-платформенно (в т.ч. в облаке).
 
-## Шаг 1 — Скаффолдинг решения
+## Шаг 1 — Скаффолдинг решения ✅ (выполнено)
 - Создать `RevitNvf.sln` и проекты с TFM из спецификации:
   `RevitNvf.Core` (netstandard2.0), `RevitNvf.Revit` (net48),
   `RevitNvf.UI` (net48/WPF), `RevitNvf.Core.Tests` (net8.0, xUnit).
@@ -13,8 +13,11 @@
   путь через MSBuild-свойство.
 - `build/RevitNvf.addin`; post-build `RevitNvf.Revit` — копирование сборки и
   манифеста в `%AppData%\Autodesk\Revit\Addins\2024`.
-- Проверка: `dotnet test tests/RevitNvf.Core.Tests` зелёный (пустой/smoke-тест).
-- Включить SessionStart-хук фактически заработает (тест-проект появился).
+- Проверка: `dotnet test tests/RevitNvf.Core.Tests` зелёный (smoke-тесты
+  `Point2dTests`). **Запускать локально / в CI** — в облачном контейнере нет
+  .NET SDK; SessionStart-хук это определяет и пропускает прогон.
+- Реализовано: `Directory.Build.props` (RevitVersion/RevitApiDir), 4 проекта,
+  `Point2d` + smoke-тесты, `build/RevitNvf.addin`, post-build деплой (Windows).
 
 ## Шаг 2 — Hello-World в Revit
 - `IExternalApplication`: вкладка на ленте + кнопка.

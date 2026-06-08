@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- WPF-слой: Ribbon-обвязка, dockable-панели, viewmodels.
+       net48 + WPF. Собирается ТОЛЬКО на Windows. -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>RevitNvf.UI</RootNamespace>
+    <AssemblyName>RevitNvf.UI</AssemblyName>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RevitNvf.Core\RevitNvf.Core.csproj" />
+    <ProjectReference Include="..\RevitNvf.Revit\RevitNvf.Revit.csproj" />
+  </ItemGroup>
+
+</Project>

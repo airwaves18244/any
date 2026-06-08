@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Доменная модель и алгоритмы раскладки НВФ.
+       БЕЗ ссылок на Autodesk.Revit.* — собирается и тестируется кросс-платформенно. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>RevitNvf.Core</RootNamespace>
+    <AssemblyName>RevitNvf.Core</AssemblyName>
+  </PropertyGroup>
+
+</Project>

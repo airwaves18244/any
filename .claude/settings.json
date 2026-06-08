@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -d tests/RevitNvf.Core.Tests ]; then echo '[RevitNvf] Running Core tests...'; dotnet test tests/RevitNvf.Core.Tests --nologo -v minimal || echo '[RevitNvf] Core tests reported failures (see above).'; else echo '[RevitNvf] Core test project not scaffolded yet — skipping build/test (see docs/ROADMAP.md step 1).'; fi"
+            "command": "if [ ! -d tests/RevitNvf.Core.Tests ]; then echo '[RevitNvf] Core test project not scaffolded yet — skipping (see docs/ROADMAP.md step 1).'; elif ! command -v dotnet >/dev/null 2>&1; then echo '[RevitNvf] .NET SDK not available in this environment — skipping Core tests (build locally with VS 2022 / dotnet).'; else echo '[RevitNvf] Running Core tests...'; dotnet test tests/RevitNvf.Core.Tests --nologo -v minimal || echo '[RevitNvf] Core tests reported failures (see above).'; fi"
           }
         ]
       }
