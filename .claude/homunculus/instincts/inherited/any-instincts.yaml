@@ -1,0 +1,298 @@
+# Instincts generated from https://github.com/airwaves18244/any
+# Generated: 2026-06-08T13:55:45.949Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: any-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/airwaves18244/any
+---
+
+# Any Commit Length
+
+## Action
+
+Keep commit messages concise (~35 characters)
+
+## Evidence
+
+- Average commit message length: 35 chars
+- Based on 1 commits
+
+---
+id: any-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/airwaves18244/any
+---
+
+# Any Naming Files
+
+## Action
+
+Use PascalCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: PascalCase
+
+---
+id: any-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/airwaves18244/any
+---
+
+# Any Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: any-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/airwaves18244/any
+---
+
+# Any Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: any-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/airwaves18244/any
+---
+
+# Any Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: csharp-file-naming-pascalcase
+trigger: "When creating a new C# source file"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Csharp File Naming Pascalcase
+
+## Action
+
+Name the file using PascalCase
+
+## Evidence
+
+- Pattern in namingConventions.files: PascalCase
+
+---
+id: csharp-class-naming-pascalcase
+trigger: "When defining a new class in C#"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Csharp Class Naming Pascalcase
+
+## Action
+
+Name the class using PascalCase
+
+## Evidence
+
+- Pattern in namingConventions.classes: PascalCase
+
+---
+id: csharp-function-naming-camelcase
+trigger: "When defining a new function/method in C#"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Csharp Function Naming Camelcase
+
+## Action
+
+Name the function using camelCase
+
+## Evidence
+
+- Pattern in namingConventions.functions: camelCase
+
+---
+id: csharp-constant-naming-screaming-snake-case
+trigger: "When defining a constant in C#"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Csharp Constant Naming Screaming Snake Case
+
+## Action
+
+Name the constant using SCREAMING_SNAKE_CASE
+
+## Evidence
+
+- Pattern in namingConventions.constants: SCREAMING_SNAKE_CASE
+
+---
+id: csharp-imports-relative
+trigger: "When importing modules in C#"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Csharp Imports Relative
+
+## Action
+
+Use relative import paths
+
+## Evidence
+
+- Pattern in importStyle: relative
+
+---
+id: csharp-exports-named
+trigger: "When exporting modules or classes in C#"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Csharp Exports Named
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in exportStyle: named
+
+---
+id: test-location-separate-folder
+trigger: "When adding or organizing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Test Location Separate Folder
+
+## Action
+
+Place test projects in a separate 'tests' folder
+
+## Evidence
+
+- Pattern in folderStructure.testLocation: separate
+- Pattern in commonFolders: tests
+
+---
+id: test-project-naming
+trigger: "When naming a test project for a module"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Test Project Naming
+
+## Action
+
+Name the test project as [ModuleName].Tests
+
+## Evidence
+
+- Pattern in configFiles: tests/RevitNvf.Core.Tests/RevitNvf.Core.Tests.csproj
+
+---
+id: git-commit-format-freeform
+trigger: "When writing a commit message"
+confidence: 0.7
+domain: git
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Git Commit Format Freeform
+
+## Action
+
+Use a freeform commit message without a strict prefix
+
+## Evidence
+
+- Pattern in commits.prefixes: []
+- Example: 'Шаг 1: скаффолдинг решения RevitNvf'
+
+---
+id: git-commit-length-short
+trigger: "When composing a commit message"
+confidence: 0.7
+domain: git
+source: repo-analysis
+source_repo: airwaves18244/any
+---
+
+# Git Commit Length Short
+
+## Action
+
+Keep the commit message concise (around 35 characters on average)
+
+## Evidence
+
+- Pattern in commits.averageLength: 35
+
