@@ -1,42 +1,23 @@
-# RevitNvf
+# Monorepo (Archived Projects)
 
-Плагин на C# для **Autodesk Revit 2024**, автоматизирующий моделирование
-**навесных вентилируемых фасадов (НВФ)**: раскладку подоблицовочной
-конструкции (кронштейны, направляющие), облицовки, слоёв пирога и выпуск
-спецификаций.
+⚠️ **KLAMMER/RevitNvf facade compiler has been migrated** to a dedicated repository:
+→ **https://github.com/airwaves18244/AI-FACADE-COMPANY**
 
-> Репозиторий на старте содержит **настройку окружения, спецификацию и
-> пошаговый план**. Код проекта добавляется по шагам согласно `docs/ROADMAP.md`.
+This repository previously contained the **KLAMMER** facade compilation engine for Revit 2024 (НВФ automation). All code, documentation, and skills have been moved to the dedicated **AI-FACADE-COMPANY** repository for focused development.
 
-## Статус
+## Archived Content
 
-Этап 0 — настройка и планирование. Кода плагина ещё нет; см. roadmap.
+The following projects were migrated (July 2026):
+- **RevitNvf.Core** — Facade layout domain logic (netstandard2.0)
+- **RevitNvf.Revit** — Revit adapter & IExternalCommand implementations (net48)
+- **RevitNvf.UI** — WPF Ribbon UI & dockable panels (net48)
+- **RevitNvf.Core.Tests** — Unit test suite (xUnit, net8.0)
+- **KLAMMER strategy documents** — Business, architecture, and roadmap
+- **NVF domain skills** — Facade engineering knowledge for Claude Code
 
-## Архитектура (кратко)
+## Current Use
 
-Доменная логика раскладки изолирована в кросс-платформенном `RevitNvf.Core`
-(без зависимостей от Revit), что позволяет тестировать её где угодно. Тонкий
-`RevitNvf.Revit` адаптирует домен к Revit API. Подробнее — `CLAUDE.md`.
+This repository now serves as a **monorepo for other projects**. See individual project directories for details.
 
-```
-src/RevitNvf.Core    netstandard2.0  — домен, алгоритмы (без Revit)
-src/RevitNvf.Revit   net48           — адаптер, команды, транзакции
-src/RevitNvf.UI      net48 (WPF)     — лента, панели
-tests/RevitNvf.Core.Tests  net8.0    — юнит-тесты (кросс-платформенно)
-```
-
-## Документация
-
-- [`CLAUDE.md`](CLAUDE.md) — правила проекта и грабли Revit API.
-- [`docs/SPECIFICATION.md`](docs/SPECIFICATION.md) — ТЗ и доменная модель.
-- [`docs/ROADMAP.md`](docs/ROADMAP.md) — пошаговый план разработки.
-- [`docs/REVIT_MCP_SETUP.md`](docs/REVIT_MCP_SETUP.md) — настройка Revit-MCP.
-
-## Сборка
-
-```bash
-# Кросс-платформенно (домен + тесты):
-dotnet test tests/RevitNvf.Core.Tests
-
-# Полная сборка плагина — только Windows с установленным Revit 2024 (VS 2022).
-```
+To work with KLAMMER facades:
+→ Visit https://github.com/airwaves18244/AI-FACADE-COMPANY
